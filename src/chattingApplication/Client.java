@@ -7,19 +7,18 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.net.ServerSocket;
+import java.io.IOException;
 import java.net.Socket;
 
-public class Server extends JFrame {
+public class Client extends JFrame {
     JPanel p1;
     JTextField t1;
     JButton b1;
     static JTextArea a1;
-    static ServerSocket skt;
     static Socket s;
     static DataInputStream din;
     static DataOutputStream dout;
-    Server() {
+    Client() {
         p1=new JPanel();
         p1.setLayout(null);
         p1.setBackground(new Color(7,94,84));
@@ -40,8 +39,8 @@ public class Server extends JFrame {
         });
 
 
-        //Spiderman image
-        ImageIcon i4=new ImageIcon("C:\\Users\\Ritesh Verma\\IdeaProjects\\Chatting-Application\\src\\chattingApplication\\icons\\spiderman.png");
+        //Ironman image
+        ImageIcon i4=new ImageIcon("C:\\Users\\Ritesh Verma\\IdeaProjects\\Chatting-Application\\src\\chattingApplication\\icons\\ironman.png");
         Image i5= i4.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH);
         ImageIcon i6 =new ImageIcon(i5);
         JLabel l2=new JLabel(i6);
@@ -50,7 +49,7 @@ public class Server extends JFrame {
 
 
         //NAme text
-        JLabel l3=new JLabel("Spiderman");
+        JLabel l3=new JLabel("Ironman");
         l3.setFont(new Font("SAN_SERIF",Font.BOLD,16));
         l3.setForeground(Color.WHITE);
         l3.setBounds(100,3,150,15);
@@ -94,7 +93,7 @@ public class Server extends JFrame {
         p1.add(l7);
 
 
-       //TextArea
+        //TextArea
         a1=new JTextArea();
         a1.setBounds(2,50,400,430);
         a1.setFont(new Font("SAN_SERIF",Font.CENTER_BASELINE,13));
@@ -123,38 +122,37 @@ public class Server extends JFrame {
         l8.setBounds(335,490,50,50);
         add(l8);
         l8.addMouseListener(new MouseAdapter() {
-
             @Override public void mouseClicked(MouseEvent e) {
-            try{
-                       String out=t1.getText();
-            a1.setText(a1.getText()+"\n \t \t \t "+ out);
-            dout.writeUTF(out);
-            t1.setText("");}
-            catch(Exception exception){
-            }
+                try {
+                String out=t1.getText();
+                a1.setText(a1.getText()+"\n \t \t \t "+ out);
+
+                    dout.writeUTF(out);
+                } catch (IOException ioException) {
+
+                }
+                t1.setText("");
             }
         });
 
 
-                setLayout(null);
+        setLayout(null);
         setSize(400,550);
-        setLocation(150,80);
+        setLocation(650,80);
         setUndecorated(true);
         setVisible(true);
 
     }
 
     public static void main(String[] args) {
-        new Server().setVisible(true);
-        String msginput="" ;
-        try{
-                skt=new ServerSocket(6001);
-                s=skt.accept();
-                din=new DataInputStream(s.getInputStream());
-                dout=new DataOutputStream(s.getOutputStream());
-                msginput=din.readUTF();
-                a1.setText(a1.getText()+"\n"+msginput);
-
+        new Client().setVisible(true);
+        try {
+            s=new Socket("127.0.0.1",6001);
+            din=new DataInputStream(s.getInputStream());
+            dout=new DataOutputStream(s.getOutputStream());
+            String msginput="";
+            msginput= din.readUTF();
+            a1.setText(a1.getText()+"\n"+msginput);
         }
         catch (Exception e){
 
