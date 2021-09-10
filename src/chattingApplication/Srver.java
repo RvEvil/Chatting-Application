@@ -8,10 +8,8 @@ import java.net.*;
 import java.io.*;
 
 import java.util.Calendar;
-import java.text.SimpleDateFormat;import javax.swing.*;
-public class Client implements ActionListener{
-
-
+import java.text.SimpleDateFormat;
+public class Srver implements ActionListener{
 
     JPanel p1;
     JTextField t1;
@@ -21,16 +19,15 @@ public class Client implements ActionListener{
 
     static Box vertical = Box.createVerticalBox();
 
-
+    static ServerSocket skt;
     static Socket s;
     static DataInputStream din;
     static DataOutputStream dout;
 
     Boolean typing;
 
-    Client(){
+    Srver(){
         f1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         p1 = new JPanel();
         p1.setLayout(null);
         p1.setBackground(new Color(7, 94, 84));
@@ -50,7 +47,7 @@ public class Client implements ActionListener{
             }
         });
 
-        ImageIcon i4 = new ImageIcon("C:\\Users\\Ritesh Verma\\IdeaProjects\\Chatting-Application\\src\\chattingApplication\\icons\\ironman.png");
+        ImageIcon i4 = new ImageIcon("C:\\Users\\Ritesh Verma\\IdeaProjects\\Chatting-Application\\src\\chattingApplication\\icons\\spiderman.png");
         Image i5 = i4.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT);
         ImageIcon i6 = new ImageIcon(i5);
         JLabel l2 = new JLabel(i6);
@@ -79,7 +76,7 @@ public class Client implements ActionListener{
         p1.add(l7);
 
 
-        JLabel l3 = new JLabel("Ironman");
+        JLabel l3 = new JLabel("Spiderman");
         l3.setFont(new Font("SAN_SERIF", Font.BOLD, 18));
         l3.setForeground(Color.WHITE);
         l3.setBounds(110, 15, 100, 18);
@@ -101,6 +98,7 @@ public class Client implements ActionListener{
         });
 
         t.setInitialDelay(2000);
+
 
         a1 = new JPanel();
         a1.setBounds(5, 75, 440, 570);
@@ -142,14 +140,13 @@ public class Client implements ActionListener{
         f1.getContentPane().setBackground(Color.WHITE);
         f1.setLayout(null);
         f1.setSize(450, 700);
-        f1.setLocation(600, 0);
+        f1.setLocation(0, 0);
         f1.setUndecorated(true);
         f1.setVisible(true);
 
     }
 
     public void actionPerformed(ActionEvent ae){
-
         try{
             String out = t1.getText();
 
@@ -194,27 +191,26 @@ public class Client implements ActionListener{
     }
 
     public static void main(String[] args){
-        new Client().f1.setVisible(true);
+        new Srver().f1.setVisible(true);
 
+        String msginput = "";
         try{
-
-            s = new Socket("127.0.0.1", 6001);
-            din  = new DataInputStream(s.getInputStream());
-            dout = new DataOutputStream(s.getOutputStream());
-
-            String msginput = "";
-
+            skt = new ServerSocket(6001);
             while(true){
-                a1.setLayout(new BorderLayout());
-                msginput = din.readUTF();
-                JPanel p2 = formatLabel(msginput);
-                JPanel left = new JPanel(new BorderLayout());
-                left.add(p2, BorderLayout.LINE_START);
+                s = skt.accept();
+                din = new DataInputStream(s.getInputStream());
+                dout = new DataOutputStream(s.getOutputStream());
 
-                vertical.add(left);
-                vertical.add(Box.createVerticalStrut(15));
-                a1.add(vertical, BorderLayout.PAGE_START);
-                f1.validate();
+                while(true){
+                    msginput = din.readUTF();
+                    JPanel p2 = formatLabel(msginput);
+
+                    JPanel left = new JPanel(new BorderLayout());
+                    left.add(p2, BorderLayout.LINE_START);
+                    vertical.add(left);
+                    f1.validate();
+                }
+
             }
 
         }catch(Exception e){}
