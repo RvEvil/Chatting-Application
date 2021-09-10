@@ -9,7 +9,7 @@ import java.io.*;
 
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
-public class Srver implements ActionListener{
+public class Server implements ActionListener{
 
 JPanel p1;
 JTextField t1;
@@ -26,7 +26,7 @@ static DataOutputStream dout;
 
 Boolean typing;
 
-Srver(){
+Server(){
         f1.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         p1 = new JPanel();
         p1.setLayout(null);
@@ -192,7 +192,7 @@ public static JPanel formatLabel(String out){
     }
 
 public static void main(String[] args){
-        new Srver().f1.setVisible(true);
+        new Server().f1.setVisible(true);
 
         String msginput = "";
         try{
