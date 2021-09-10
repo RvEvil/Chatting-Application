@@ -33,7 +33,7 @@ public class Client implements ActionListener{
 
         p1 = new JPanel();
         p1.setLayout(null);
-        p1.setBackground(new Color(7, 94, 84));
+        p1.setBackground(new Color(47, 54, 250));
         p1.setBounds(0, 0, 450, 70);
         f1.add(p1);
 
@@ -41,7 +41,7 @@ public class Client implements ActionListener{
         Image i2 = i1.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         ImageIcon i3 = new ImageIcon(i2);
         JLabel l1 = new JLabel(i3);
-        l1.setBounds(5, 17, 30, 30);
+        l1.setBounds(5, 17, 40, 35);
         p1.add(l1);
 
         l1.addMouseListener(new MouseAdapter(){
@@ -72,10 +72,10 @@ public class Client implements ActionListener{
         p1.add(l6);
 
         ImageIcon i14 = new ImageIcon("C:\\Users\\Ritesh Verma\\IdeaProjects\\Chatting-Application\\src\\chattingApplication\\icons\\threedot.png");
-        Image i15 = i14.getImage().getScaledInstance(13, 25, Image.SCALE_DEFAULT);
+        Image i15 = i14.getImage().getScaledInstance(33, 30, Image.SCALE_DEFAULT);
         ImageIcon i16 = new ImageIcon(i15);
         JLabel l7 = new JLabel(i16);
-        l7.setBounds(410, 20, 13, 25);
+        l7.setBounds(400, 20, 33, 30);
         p1.add(l7);
 
 
@@ -103,13 +103,13 @@ public class Client implements ActionListener{
         t.setInitialDelay(2000);
 
         a1 = new JPanel();
-        a1.setBounds(5, 75, 440, 570);
+        a1.setBounds(5, 75, 440, 510);
         a1.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
         f1.add(a1);
 
 
         t1 = new JTextField();
-        t1.setBounds(5, 655, 310, 40);
+        t1.setBounds(5, 595, 310, 40);
         t1.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
         f1.add(t1);
 
@@ -132,8 +132,8 @@ public class Client implements ActionListener{
         });
 
         b1 = new JButton("Send");
-        b1.setBounds(320, 655, 123, 40);
-        b1.setBackground(new Color(7, 94, 84));
+        b1.setBounds(320, 595, 123, 40);
+        b1.setBackground(new Color(47, 54, 250));
         b1.setForeground(Color.WHITE);
         b1.setFont(new Font("SAN_SERIF", Font.PLAIN, 16));
         b1.addActionListener(this);
@@ -141,8 +141,8 @@ public class Client implements ActionListener{
 
         f1.getContentPane().setBackground(Color.WHITE);
         f1.setLayout(null);
-        f1.setSize(450, 700);
-        f1.setLocation(600, 0);
+        f1.setSize(450, 650);
+        f1.setLocation(650, 10);
         f1.setUndecorated(true);
         f1.setVisible(true);
 
@@ -178,7 +178,7 @@ public class Client implements ActionListener{
 
         JLabel l1 = new JLabel("<html><p style = \"width : 150px\">"+out+"</p></html>");
         l1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        l1.setBackground(new Color(37, 211, 102));
+        l1.setBackground(new Color(51, 153, 255));
         l1.setOpaque(true);
         l1.setBorder(new EmptyBorder(15,15,15,50));
 
